@@ -1,0 +1,60 @@
+*{
+    padding : 0;
+    margin : 0;
+    box-sizing: border-box;
+    outline : none;
+    font-family: 'Roboto', sans-serif;
+}
+
+h2{
+    text-align :left;
+    padding : 10px 0;
+    font-size : 30px;
+    color : #1b223c;
+}
+.form{
+    margin: 0 100px;
+}
+.form-group{
+    color : #1b223c !important;
+}
+
+.table-fixed thead th{
+    background: #1b223c;
+    color : white;
+}
+.table-fixed{
+    min-width : 100%;
+}
+.table-fixed thead,
+.table-fixed thead th{
+    background: #1b223c;
+    color : white;
+}
+.table-fixed thead tr th{
+    border: 0 !important;
+}
+.table-fixed body tr td:last-child {
+    border-right :0;
+}
+.table-fixed tbody td,
+.table-fixed thead tr th {
+    float : left;
+    font-size : 15px;
+    padding-left : 0px !important;
+    text-align : center;
+}
+.table-fixed .col{
+    width : 25%;
+    padding-top :5px;
+    padding-bottom:5px;
+}
+.table-fixed tbody {
+    display : block;
+    height : 200px;
+    overflow-y :auto;
+    color : #1b223c;
+}
+.table-fixed tr{
+    display : block;
+}

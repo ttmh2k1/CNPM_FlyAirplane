@@ -1,0 +1,20 @@
+{% if isEmp %}
+{% extends 'layouts/baseEmp.html' %}
+{% else %}
+{% extends 'layouts/baseCus.html' %}
+{% endif %}
+
+{% block content %}
+<title>About us</title>
+<br>
+<div class="information">
+    <h1 style="text-align: center; color: #1b223c">Software Engineering</h1>
+    <h2 style="text-align: center; color: #1b223c; padding: 10px">This is a website for a final software engineering
+        project</h2>
+    <h3 style="text-align: center; color: #1b223c; padding: 10px">Group: 3</h3>
+    <p style="text-align: center; color: #1b223c; padding: 10px">Trần Thị Mỹ Huyền - 19110371</p>
+    <p style="text-align: center; color: #1b223c; padding: 10px">Lê Trần Thanh Hân - 19110360</p>
+    <p style="text-align: center; color: #1b223c; padding: 10px">Phạm Phong Duy &nbsp;&nbsp; - 19110338</p>
+    <br>
+</div>
+{% endblock %}

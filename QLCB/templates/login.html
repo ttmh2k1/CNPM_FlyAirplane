@@ -1,0 +1,86 @@
+{% extends 'layouts/baseCus.html' %}
+
+{% block content %}
+<link href="{{ url_for('static', filename='css/loginCus.css') }}" rel="stylesheet">
+<script src="{{ url_for('static' , filename = 'js/signup.js')}}"></script>
+
+{% if isSignup %}
+<body onload="toSignup()"></body>
+{% endif %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto p-0">
+        <div class="card">
+            <div class="login-box">
+                <div class="login-snip"><input id="tab-1" type="radio" name="tab" class="sign-in" checked><label
+                        for="tab-1" class="tab" onclick="to_signin()">Sign In</label>
+                    <input id="tab-2" type="radio" name="tab" class="sign-up">
+                    <label for="tab-2" class="tab">Sign Up</label>
+                    <div class="login-space">
+
+                        <form action="" method="post">
+                            <div class="login">
+                                <div class="group"><label class="label">Phone</label> <input name="phone" type="text"
+                                                                                             class="input"
+                                                                                             placeholder="Enter your phone"
+                                                                                             required></div>
+                                <div class="group"><label class="label">Password</label> <input name="password"
+                                                                                                type="password"
+                                                                                                class="input"
+                                                                                                data-type="password"
+                                                                                                placeholder="Enter your password"
+                                                                                                required></div>
+                                <div class="group"><input id="check" type="checkbox" class="check" checked> <label
+                                        for="check"><span class="icon"></span> Keep me Signed in</label></div>
+                                <div class="group"><input type="submit" class="button" value="Sign In"></div>
+                                {% if error %}
+                                <div class="alert alert-danger text-center"> {{error}}</div>
+                                {% endif %}
+                                <div class="hr"></div>
+
+                                <div class="foot"><a href="/fgPassword">Forgot Password?</a></div>
+                            </div>
+                        </form>
+
+                        <form action="/signup" method="post"
+                              oninput='repassword.setCustomValidity(repassword.value != password.value ? "Passwords do not match." : "")'>
+                            <div class="sign-up-form">
+                                <div class="group"><label class="label">Name</label> <input name="name" type="text"
+                                                                                            class="input"
+                                                                                            placeholder="Enter your Name"
+                                                                                            required></div>
+                                <div class="group"><label class="label">Phone</label> <input name="phone" type="text"
+                                                                                             class="input"
+                                                                                             placeholder="Enter your phone number"
+                                                                                             required></div>
+                                <div class="group"><label class="label">Password</label> <input name="password"
+                                                                                                type="password"
+                                                                                                class="input"
+                                                                                                data-type="password"
+                                                                                                placeholder="Create your password"
+                                                                                                required></div>
+                                <div class="group"><label class="label">Repeat Password</label> <input name="repassword"
+                                                                                                       type="password"
+                                                                                                       class="input"
+                                                                                                       data-type="password"
+                                                                                                       placeholder="Repeat your password"
+                                                                                                       required></div>
+                                <div class="group"><input type="submit" class="button" value="Sign Up"></div>
+                                {% if err %}
+                                <div class="alert alert-danger text-center"> {{err}}</div>
+                                {% endif %}
+                                {% if msg %}
+                                <div class="alert alert-success text-center"> {{msg}}</div>
+                                {% endif %}
+                                <div class="hr"></div>
+                                <div class="foot"><label for="tab-1">Already Member?</label></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

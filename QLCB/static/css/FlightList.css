@@ -1,0 +1,74 @@
+h2{
+    text-align: center;
+    padding : 10px 0;
+    font-size : 30px;
+    color : #1b223c;
+}
+
+.form{
+     margin :0 100px;
+}
+
+.topic-label{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 40px;
+}
+
+label, option{
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: #1b223c;
+}
+
+.row {
+    padding: 0 20px;
+}
+.row .card-form {
+    padding: 10px;
+}
+
+.form-search {
+    display: block;
+    position: relative;
+}
+
+.btn-search, .btn-page{
+    background: #1b223c !important;
+    color: #fff !important;
+    margin-bottom: 10px !important;
+    box-shadow: none;
+    border: none;
+}
+
+.btn-search:hover, .btn-page:hover{
+    background: #1b223c;
+    color: #fff;
+}
+
+.btn-search:focus, .btn-page:focus {
+    background: #1b223c;
+    color: #fff;
+    box-shadow: none
+}
+
+.btn-search:active, .btn-page:active {
+    background: #1b223c;
+    color: #fff;
+    box-shadow: none
+}
+
+h4{
+    color: #1b223c;
+    text-align: center;
+}
+
+.btn-group{
+    padding: 10px 40px;
+}
+
+.pagination{
+    padding: 30px 10px 15px 30px;
+}

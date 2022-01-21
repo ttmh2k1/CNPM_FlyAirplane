@@ -1,0 +1,114 @@
+{% extends 'layouts/baseEmp.html' %}
+
+{% block content %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+<div class="container rounded bg-white">
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-4 border-right">
+                <div class="d-flex flex-column align-items-center p-3 py-5">
+                    <img id="avt" class="mt-5 img-fluid"
+                         {% if current_user.avatar %}
+                         src="{{customer.avatar}}"
+                         {% elif current_user.gender=='Female'%}
+                         src="{{url_for('static', filename= 'image/female.png')}}"
+                         {% else %}
+                         src="{{url_for('static', filename= 'image/male.png')}}"
+                         {% endif %}
+                    >
+                </div>
+                <div class="d-flex flex-column align-items-center">
+                    <div class="btn btn-info custom-buttom">
+                        <p>Upload your photo</p>
+                        <input name="avatar" style="width: 250px" type="file" onchange="showImage(event)">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 border-right custom-form">
+                <div class="p-3 py-5">
+                    {% if mes %}
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="text-danger text-center">{{mes[0]}}</h5>
+                    </div>
+                    {% endif %}
+                    <div class="d-flex justify-content-between align-items-center mb-3 profile-info">
+                        <h3 class="text-center">Profile Information</h3>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><h5 class="labels">Username <i class='bx bx-badge-check'
+                                                                                  style='color:#b90000'></i></h5>
+                            <input type="text" name="username" class="form-control" placeholder="Enter username"
+                                   value="{{current_user.username}}" readonly>
+                        </div>
+                        <div class="col-md-12"><h5 class="labels">Name <i class='bx bx-badge-check'
+                                                                          style='color:#b90000'
+                                                                          title="Please fill out this field"></i></h5>
+                            <input type="text" name="employeeName" class="form-control" placeholder="Enter your name"
+                                   value="{{current_user.employeeName}}" required>
+                        </div>
+                        <div class="col-md-12"><h5 class="labels">Date of birth</h5>
+                            <input type="date" name="dob" class="form-control" placeholder="Enter date of birth"
+                                   value="{{current_user.dob}}">
+                        </div>
+                        <div class="col-md-12"><h5 class="labels">Gender</h5>
+                            <select name="gender" class="form-control">
+                                <option value="Other">Other</option>
+                                <option {% if current_user.gender=='Male'%}
+                                        selected
+                                        {% endif%}
+                                        value="Male">Male
+                                </option>
+                                <option {% if current_user.gender=='Female'%}
+                                        selected
+                                        {% endif %}
+                                        value="Female">Female
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-12"><h5 class="labels">ID No</h5>
+                            <input type="text" name="idNo" class="form-control"
+                                   {% if current_user.idNo %}
+                                   value="{{current_user.idNo}}"
+                                   {% endif %}
+                                   placeholder="Enter idNo">
+                        </div>
+                        <div class="col-md-12"><h5 class="labels">Email</h5>
+                            <input type="text" name="email" class="form-control"
+                                   {% if current_user.email %}
+                                   value="{{current_user.email}}"
+                                   {% endif %}
+                                   placeholder="Enter email">
+                        </div>
+                        <div class="col-md-12"><h5 class="labels">Phone Number <i class='bx bx-badge-check'
+                                                                                  style='color:#b90000'
+                                                                                  title="Please fill out this field"></i>
+                        </h5>
+                            <input type="text" name="phone" class="form-control"
+                                   {% if current_user.phone %}
+                                   value="{{current_user.phone}}"
+                                   {% endif %}
+                                   placeholder="Enter phone"
+                                   required>
+                        </div>
+                        <div class="col-md-12"><h5 class="labels">Address</h5>
+                            <input type="text" name="address" class="form-control"
+                                   {% if current_user.address %}
+                                   value="{{current_user.address}}"
+                                   {% endif %}
+                                   placeholder="Enter address">
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center">
+
+                        <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                        <a style="button" class="btn btn-primary pw-button" href="/changePwEmp">Change Password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% if isEmp %}
+{% extends 'layouts/baseEmp.html' %}
+{% else %}
+{% extends 'layouts/baseCus.html' %}
+{% endif %}
+
+{% block content %}
+<link href="../static/css/FlightList.css" rel="stylesheet"/>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+<div class="forms">
+    <h2>FLIGHT LIST</h2>
+    <form action="" method="post">
+        <div class="row topic-label">
+            <div class="col-md-3 col-xs-15">
+                <label>Departure Airport</label>
+                <select id="sl1" name="start" class="col-md-12 col-xs-12 form-control">
+                    <option value="0">All</option>
+                    {% for a in airport_name%}
+                    <option value="{{a.id}}">{{a.airportName}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <label>Destination Airport</label>
+                <select id="sl2" name="destination" class="col-md-12 col-xs-12 form-control">
+                    <option value="0">All</option>
+                    {% for a in airport_name%}
+                    <option value="{{a.id}}">{{a.airportName}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 col-xs-12 ">
+                <label>Take off time</label>
+                <input name="takeOffTime" type="date" class="form-control">
+            </div>
+            <div class="col-md-3 col-xs-12 form-search" style="padding-top: 40px">
+                <button class="form-control btn-search" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        {% if flights %}
+        {% for f in flights %}
+        <div class="col-md-4 col-xs-12 card-form">
+            <div class="card">
+                <img class="card-img-top img-fluid" src="{{url_for('static', filename= 'image/2.jpg')}}"
+                     alt="Card image">
+                <div class="card-body">
+                    <h4 class="card-title">{{f.startAirport.airportName}} <i class='bx bx-chevrons-right'
+                                                                             style='color:#1b223c'></i>
+                        {{f.destinationAirport.airportName}}</h4>
+                    <div class="btn-group">
+                        <a class="btn btn-booking btn-page"
+                           {% if isEmp %}
+                           onclick="prebook(new Date('{{f.takeOffTime}}'), {{date_rule}}, {{f.id}},
+                        '/booking/{{f.id}}')"
+                           {% else %}
+                           onclick="prebook(new Date('{{f.takeOffTime}}'), {{date_rule}}, {{f.id}},
+                        '/bookingOnline/{{f.id}}')"
+                           {% endif %}
+                        >Booking
+                        </a> &nbsp;
+                        <a class="btn btn-page"
+                           {% if isEmp %}
+                           href="/flight-detail/{{f.id}}?isEmp=1"
+                           {% else %}
+                           href="/flight-detail/{{f.id}}"
+                           {% endif %}
+                        >More detail</a>
+                    </div>
+                    <p class="card-text">Business Class Ticket: {{f.noBusinessClass -
+                        slots[f.id]['business']}}/{{f.noBusinessClass}}</p>
+                    <p class="card-text">Economy Class Ticket: {{f.noEconomyClass -
+                        slots[f.id]['economy']}}/{{f.noEconomyClass}} </p>
+                    <p class="card-text">Take off time: {{f.takeOffTime}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="alert alert-info text-center col-md-12"> No flight in current</div>
+        {% endif %}
+    </div>
+
+    <ul class="pagination">
+        <li class="page-item"><a class="btn page-link btn-page"
+                                 {% if page_cur== 1 %}
+                                 disabled="true"
+                                 {% endif %}
+                                 onclick="previousPage({{page_cur}})">Previous</a></li>
+        {% for i in range(1, page_num + 1) %}
+        <li class="page-item"><a id="page{{i}}"
+                                 {% if isEmp %}
+                                 href="flight-list?page={{i}}&isEmp=1"
+                                 {% else %}
+                                 href="flight-list?page={{i}}"
+                                 {% endif %}
+                                 class="page-link" >{{i}}</a></li>
+        {% endfor %}
+        <li class="page-item"><a class="btn page-link btn-page"
+                                 {% if page_cur== page_num %}
+                                 disabled="true"
+                                 {% endif %}
+                                 onclick="nextPage({{page_cur}})">Next</a></li>
+    </ul>
+</div>
+{% endblock %}
+
+

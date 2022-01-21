@@ -1,0 +1,79 @@
+*{
+    padding : 0;
+    margin : 0;
+    box-sizing: border-box;
+    outline : none;
+    font-family: 'Roboto', sans-serif;
+}
+
+.forms h1{
+    text-align :center;
+    font-size : 70px;
+    margin-bottom : 50px;
+    color : #0941bb ;
+}
+.form{
+    margin : 0 100px;
+}
+.form-group{
+    color : #000000;
+}
+.topic-table{
+    padding : 10px 30px 10px;
+    background-color : #add8de;
+    margin :0 auto;
+    width : 100%;
+}
+
+.submit-form .sub{
+    margin : 10px 0 10px 250px ;
+    background-color: grey;
+    border: none;
+    color: white;
+    padding: 10px 50px;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*CSS.TABLE*/
+.table-fixed{
+    margin-left:14.2px;
+    margin-top:0;
+    max-width : 97.3%;
+
+}
+.table-fixed thead,
+.table-fixed thead  th{
+    background: #ae2b2b;
+    color : white;
+
+}
+.table-fixed thead tr th{
+    border: 0 !important;
+}
+.table-fixed body tr td:last-child {
+    border-right : 0;
+
+}
+.table-fixed tbody td,
+.table-fixed thead tr th {
+    float : left;
+    font-size : 15px;
+    padding-left : 0px !important;
+    text-align : center;
+
+}
+.table-fixed .col{
+    width : 50%;
+    padding : 5px 0 5px 0;
+}
+
+
+.table-fixed tbody {
+    display : block;
+    height :250px;
+    overflow-y :auto;
+    color : #171d23;
+}
+.table-fixed tr{
+    display : block;
+}

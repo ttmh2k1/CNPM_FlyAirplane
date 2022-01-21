@@ -1,0 +1,48 @@
+{% extends 'layouts/baseCus.html' %}
+
+{% block content %}
+<link href="../static/css/BookingHistory.css" rel="stylesheet"/>
+<div class="forms">
+    <form class="form">
+        <h2>BOOK HISTORY</h2>
+        {% if book_list %}
+        <div class="form-group">
+            <table class="col-xs-7 table-bordered table-striped table-condensed table-fixed">
+                <div class="row">
+                    <thead>
+                    <tr>
+                        <th class="col2">Start Airport</th>
+                        <th class="col2">Destination Airport</th>
+                        <th class="col3">No Business Class tickets</th>
+                        <th class="col3">No Economy Class tickets</th>
+                        <th class="col2">Take of time</th>
+                        <th class="col1">Status</th>
+                        <th class="col1">Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for b in book_list%}
+                    <tr>
+                        <td class="col2">{{b.flight.startAirport.airportName}}</td>
+                        <td class="col2">{{b.flight.destinationAirport.airportName}}</td>
+                        <td class="col3">{{b.noBusinessClass}}</td>
+                        <td class="col3">{{b.noEconomyClass}}</td>
+                        <td class="col2">{{b.flight.takeOffTime}}</td>
+                        {% if b.status == 1 %}
+                        <td class="col1"> paid</td>
+                        {% else %}
+                        <td class="col1"> not paid</td>
+                        {% endif %}
+                        <td class="col1"><a href="/flight-detail/{{b.flight.id}}"> More info</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </div>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-info"> You don't have any book detail</div>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

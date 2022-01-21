@@ -1,0 +1,52 @@
+{% extends 'layouts/baseEmp.html' %}
+
+{% block content %}
+<link href="../static/css/ManageCustomer.css" rel="stylesheet"/>
+<div class="forms">
+    <form class="form">
+        <h2>CUSTOMER INFORMATION</h2>
+
+        <div class="form-group">
+            <div class="row">
+                <table class="col-xs-7 table-bordered table-striped table-condensed table-fixed">
+                    <thead>
+                    <tr>
+                        <th class="col1">ID Customer</th>
+                        <th class="col2">Name</th>
+                        <th class="col1">DOB</th>
+                        <th class="col1">Gender</th>
+                        <th class="col1">ID No</th>
+                        <th class="col2">Phone</th>
+                        <th class="col2">Address</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% if list_customer %}
+                    {% for f in list_customer %}
+                    <tr>
+                        <td class="col1">{{f.id}}</td>
+                        <td class="col2">{{f.customerName}}</td>
+                        <td class="col1">{{f.dob}}</td>
+                        <td class="col1">{{f.gender}}</td>
+                        <td class="col1">{{f.idNo}}</td>
+                        <td class="col2">{{f.phone}}</td>
+                        <td class="col2">{{f.address}}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <div class="alert alert-info"> Don't have any customers!</div>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="mt-5 text-center button">
+            <a class="btn btn-primary add-btn" href="/add-customer">New Customer</a>
+            <br>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

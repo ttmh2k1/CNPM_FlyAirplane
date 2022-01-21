@@ -1,0 +1,64 @@
+{% if isEmp %}
+{% extends 'layouts/baseEmp.html' %}
+{% else %}
+{% extends 'layouts/baseCus.html' %}
+{% endif %}
+
+{% block content %}
+<link href="../static/css/Schedule.css" rel="stylesheet"/>
+<div class="forms">
+    <form class="form">
+        <h2>FLIGHT SCHEDULE</h2>
+
+        {% if flight %}
+        <div class="form-group">
+            <label for="idf">ID Flight:</label>
+            <input type="text" class="form-control" name="IDFlight" id="idf" value="{{flight.id}}" readonly>
+            <label>Departure airport:</label>
+            <input type="text" class="form-control" value="{{flight.startAirport}}" readonly>
+            <label>Destination airport:</label>
+            <input type="text" class="form-control" value="{{flight.destinationAirport}}" readonly>
+            <label for="dte-begin">Take off time:</label>
+            <input class="form-control" id="dte-begin" value="{{flight.takeOffTime}}" readonly>
+            <label for="time-begin">Flight time (mins):</label>
+            <input type="text" class="form-control" id="time-begin" value="{{flight.flightTime}}" readonly>
+            <label for="amt1">Number of economy class tickets:</label>
+            <input type="text" class="form-control" id="amt1"
+                   value="{{flight.noEconomyClass - slot['economy']}} / {{flight.noEconomyClass}}" readonly>
+            <label for="amt2">Number of business class tickets:</label>
+            <input type="text" class="form-control" id="amt2"
+                   value="{{flight.noBusinessClass - slot['business']}} / {{flight.noBusinessClass}}" readonly>
+            <br>
+        </div>
+        {% endif %}
+
+        {% if stopovers %}
+        <h5 style="color: #1b223c">INTERMEDIATE AIRPORT</h5>
+        <div class="form-group">
+            <table class="col-xs-7 table-bordered table-striped table-condensed table-fixed">
+                <div class="row">
+                    <thead>
+                    <tr>
+                        <th class="col">Stopover name</th>
+                        <th class="col">Stopover address</th>
+                        <th class="col">Stopover time</th>
+                        <th class="col">Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for s in stopovers%}
+                    <tr>
+                        <td class="col">{{s.stopover.stopoverName}}</td>
+                        <td class="col">{{s.stopover.stopoverAddress}}</td>
+                        <td class="col">{{s.stopoverTime}}</td>
+                        <td class="col">{{s.description}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </div>
+            </table>
+        </div>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

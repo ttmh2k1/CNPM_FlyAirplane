@@ -1,0 +1,46 @@
+{% extends 'layouts/baseEmp.html' %}
+
+{% block content %}
+<link href="../../static/css/FlightRoute.css" rel="stylesheet"/>
+<div class="forms">
+    <form class="form">
+        <h2>FLIGHT ROUTE INFORMATION</h2>
+
+        <div class="form-group">
+            <div class="row">
+                <table class="col-xs-7 table-bordered table-striped table-condensed table-fixed">
+                    <thead>
+                    <tr>
+                        <th class="col1">ID Flight</th>
+                        <th class="col2">Departure Airport</th>
+                        <th class="col2">Destination Airport</th>
+                        <th class="col3">Take off Time</th>
+                        <th class="col4">No Business Class tickets</th>
+                        <th class="col4">No Economy Class tickets</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% if list_route %}
+                    {% for f in list_route %}
+                    <tr>
+                        <td class="col1">{{f.id}}</td>
+                        <td class="col2">{{f.startAirport.airportName}}</td>
+                        <td class="col2">{{f.destinationAirport.airportName}}</td>
+                        <td class="col3">{{f.takeOffTime}}</td>
+                        <td class="col4">{{f.noBusinessClass}}</td>
+                        <td class="col4">{{f.noEconomyClass}}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <div class="alert alert-info"> Don't have any flight route!</div>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+    </form>
+</div>
+
+{% endblock %}

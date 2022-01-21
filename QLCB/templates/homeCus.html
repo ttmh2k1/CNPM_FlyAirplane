@@ -1,0 +1,14 @@
+{% extends 'layouts/baseCus.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if error %}
+<div class="alert alert-success">{{error}}</div>
+{% elif msg %}
+<div class="alert alert-success">{{msg}}</div>
+{% endif %}
+<div class="container-fluid">
+    <img src="{{ url_for('static', filename='image/1.jpg') }}" width="100%">
+</div>
+{% endblock %}

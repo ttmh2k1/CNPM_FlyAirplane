@@ -1,0 +1,71 @@
+<aside class="left-sidebar bg-sidebar">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+  <div id="sidebar" class="sidebar sidebar-with-footer">
+
+    <!-- Aplication Brand -->
+    <div class="app-brand">
+      <a href="/customer" title="Dashboard">
+        <div class="logo-details">
+          <i class='bx bxs-plane-alt bx-md' style='margin-top: 16pt; color:#ffffff'></i>
+        </div>
+        <span class="brand-name nav-text">Home</span>
+      </a>
+    </div>
+
+    <!-- begin sidebar -->
+    <div class="sidebar">
+
+      <!-- sidebar menu -->
+      <ul class="nav sidebar-inner" id="sidebar-menu">
+
+        <li class="has-sub active expand">
+          <a class="sidenav-item-link" href="/flight-list"
+             aria-expanded="false" aria-controls="flight-list">
+            <i class='bx bx-spreadsheet' style='color:#ffffff'></i>
+            <span class="nav-text">Flight list</span>
+          </a>
+        </li>
+
+        <li class="has-sub active expand">
+          <a class="sidenav-item-link" href="/booking-history"
+             aria-expanded="false" aria-controls="tables">
+            <i class='bx bxs-detail' style='color:#ffffff'></i>
+            <span class="nav-text">Booking history</span>
+          </a>
+        </li>
+
+      </ul>
+      <ul class="nav sidebar-inner custom-sidebar">
+        {% if customer_acc %}
+        <li class="has-sub active expand">
+          <a class="sidenav-item-link text-white" style="font-size: 13px" href="/profile">
+            <i class='bx bxs-user-circle' style='color:#ffffff'></i>
+            <span class="nav-text">{{customer_acc.customerName}}</span>
+          </a>
+        </li>
+        <li class="has-sub active expand">
+          <a class="nav-text" href="/logout">
+            <i class='bx bxs-log-out-circle bx-sx' style='color:#ffffff'></i>
+            <span class="nav-text"> Log out</span>
+          </a>
+          </a>
+        </li>
+        {% else %}
+        <li class="has-sub active expand">
+          <a class="nav-link" href="/login">
+            <i class='bx bxs-log-in-circle bx-sx' style='color:#ffffff'></i>
+            <span class="nav-text"> Sign in</span>
+          </a>
+        </li>
+        <li class="has-sub active expand">
+          <a class="nav-link" href="/signup">
+            <i class='bx bxs-user-plus bx-sx' style='color:#ffffff'></i>
+            <span class="nav-text"> Sign up</span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</aside>

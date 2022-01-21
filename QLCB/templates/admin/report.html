@@ -1,0 +1,127 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/report.css') }}">
+
+<div class="container-fluid">
+    <div class="row justicontent-left">
+        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-8 col-8">
+            <div class="card card-style mb-2">
+                <div class="card-body">
+                    <div class="chart-container" style="position: relative">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "col-xl-6 col-lg-6 col-md-8 col-sm-8 col-8">
+            <div class="card card-style mb-2">
+                <div class="card-body">
+                    <div class="chart-container" style="position: relative">
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4" style="">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle float-right" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Statistics by
+                </button>
+                <ul class="dropdown-menu multi-level " role="menu" aria-labelledby="dropdownMenu">
+                    <li class="dropdown-item"><a href="/admin/reportview">Years</a></li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item" tabindex="-1" href="#">Month of the year</a>
+                        <ul class="dropdown-menu">
+                            {% for i in workYear %}
+                            <li class="dropdown-item"><a href="/admin/reportview?year={{i}}&other=month">{{i}}</a></li>
+                              {% endfor %}
+                          </ul>
+                    </li>
+                    <li class="dropdown-submenu ">
+                        <a class="dropdown-item" tabindex="-1" href="#">Quarter of the year</a>
+                        <ul class="dropdown-menu">
+                            {% for i in workYear %}
+                            <li class="dropdown-item"><a href="/admin/reportview?year={{i}}&other=quarter">{{i}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+
+<script>
+    let revenue_labels = JSON.parse({{revenue_labels | tojson}});
+    let revenue_data = JSON.parse( {{revenue_data| tojson}});
+    let chartName = JSON.parse({{chartName | tojson }});
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: revenue_labels,
+        datasets: [{
+            label: "Revenue (VNĐ)",
+            data: revenue_data,
+            backgroundColor: 'steelBlue',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        plugins:{
+        title:{
+            display:true ,
+            text: chartName,
+            fontSize:30
+        }
+    }}
+});
+</script>
+
+<script>
+    let ticket_labels = JSON.parse({{ticket_labels | tojson}});
+    let ticket_data = JSON.parse( {{ticket_data| tojson}});
+    let ticket_type = JSON.parse({{ticket_type|tojson}})
+    let chartName_2 = JSON.parse({{chartName | tojson }});
+
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var myChart2 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ticket_labels,
+        datasets: [{
+            label: ticket_type[0],
+            data: ticket_data[0],
+            backgroundColor: 'steelBlue',
+            borderWidth: 1
+        },
+        {
+            label: ticket_type[1],
+            data: ticket_data[1],
+            backgroundColor: 'red',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        plugins:{
+        title:{
+            display:true ,
+            text: chartName_2,
+            fontSize:30
+        }
+    }}
+});
+</script>
+{% endblock %}
+{% endblock %}

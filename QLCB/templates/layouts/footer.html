@@ -1,0 +1,81 @@
+<!-- Footer -->
+<footer class="text-center text-lg-start text-white" style="background: #696969">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-2 border-bottom">
+        <!-- Left -->
+        <div class="me-1 d-none d-lg-block ">
+            <span class="d-flex justify-content-center justify-content-lg-between p-2">Get connected with us on social networks:</span>
+        </div>
+        <!-- Left -->
+
+        <!-- Right -->
+        <div>
+            <a href="" class="me-4 text-reset"><i class='bx bxl-facebook-circle bx-md' style='color:#f5f6fa'></i></a>
+            <a href="" class="me-4 text-reset"><i class='bx bxl-google-plus-circle bx-md' style='color:#f5f6fa'></i></a>
+            <a href="" class="me-4 text-reset"><i class='bx bxl-instagram-alt bx-md' style='color:#f5f6fa'></i></a>
+            <a href="" class="me-4 text-reset"><i class='bx bxl-github bx-md' style='color:#f5f6fa'></i></a>
+        </div>
+        <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="">
+        <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"></i>FLY AIRLINE
+                    </h6>
+                    <p>
+                        FLY is the website of the airline FLY
+                        <br>
+                        <br>
+                        We khow why you fly. We are FLY.
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+                    <p><a class="text-reset"
+                          {% if isEmp%}
+                          href="/profileEmp"
+                          {% else %}
+                          href="/profile"
+                          {% endif %}
+                    >Settings</a></p>
+                    <br>
+                    <p><a href="#!" class="text-reset">Help</a></p>
+                    <br>
+                    {% if isEmp %}
+                    <p><a href="/about-us?isEmp=1" class="text-reset">About us</a></p>
+                    {% else %}
+                    <p><a href="/about-us" class="text-reset">About us</a></p>
+                    {% endif %}
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                    <p><i class='bx bxs-home' style='color:#f5f6fa'></i> 1 Vo Van Ngan St, Linh Chieu, Thu Duc
+                        City, HCM City</p>
+                    <br>
+                    <p><i class='bx bxs-phone' style='color:#f5f6fa'></i> 0123 456 789</p>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </div>
+    </section>
+    <!-- Section: Links  -->
+</footer>
+<!-- Footer -->

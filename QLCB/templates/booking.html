@@ -1,0 +1,106 @@
+{% if isEmp %}
+{% extends 'layouts/baseEmp.html' %}
+{% else %}
+{% extends 'layouts/baseCus.html' %}
+{% endif %}
+
+{% block content %}
+<link href="{{ url_for('static', filename='css/booking.css') }}" rel="stylesheet">
+
+<form action=""
+      method="post"
+      oninput='noEconomy.setCustomValidity("");
+      noBusiness.setCustomValidity("");
+      cid.setCustomValidity("");'
+      onsubmit="return checkBooking({{flight.noEconomyClass - slot['economy']}}, {{flight.noBusinessClass-slot['business']}})">
+    <div class="row">
+        <div class="col-md-7 border-right">
+            <h2 class="text-right">BOOKING DETAIL</h2>
+            <div class="forms">
+                {% if error %}
+                <div class="alert alert-danger text-center"> {{error}}</div>
+                {% endif %}
+                {% if msg %}
+                <div class="alert alert-success text-center"> {{msg}}</div>
+                {% endif %}
+                <div class="form-group">
+                    <label class="labels">Number of business class tickets<i
+                            class='bx bx-badge-check' style='color:#b90000'
+                            title="Please fill out this field"></i></label>
+                    <input type="text"
+                           id="noBusiness"
+                           name="noBusiness"
+                           class="form-control"
+                           oninput="getTotalPrice({{flight.priceEconomyClass}},{{flight.priceBusinessClass}})"
+                           placeholder="Number of No economy class tickets"
+                           value="0"
+                           required>
+                    <label class="labels">Number of economy class tickets<i
+                            class='bx bx-badge-check' style='color:#b90000'
+                            title="Please fill out this field"></i></label>
+                    <input type="text"
+                           id="noEconomy"
+                           name="noEconomy"
+                           class="form-control"
+                           oninput="getTotalPrice({{flight.priceEconomyClass}},{{flight.priceBusinessClass}})"
+                           placeholder="Number of business class tickets"
+                           value="0" required>
+                    {% if isEmp %}
+                    <label class="labels">Customer</label>
+                    <select id="sl1" name="cid" class="form-control" onchange="loadCustomer({{customers|safe}})">
+                        <option value="0">Choose a customer</option>
+                        {% if customers %}
+                        {% for c in customers%}
+                        <option value="{{c['id']}}">{{c['name']}}</option>
+                        {% endfor %}
+                        {% endif%}
+                    </select>
+
+                    <label class="labels">ID No</label>
+                    <input id="idNo" type="text" name="idNo" class="form-control" readonly>
+
+                    <label class="labels">Phone number</label>
+                    <input id="phone" type="text" name="phone" class="form-control" readonly>
+                    {% endif %}
+                    <label class="labels">Total price</label>
+                    <input type="text"
+                           id="total"
+                           name="total"
+                           value="0"
+                           class="form-control"
+                           readonly>
+                </div>
+
+                <div class="mt-5 text-center group-btn">
+                    <button class="btn btn-primary book-button"
+                            type="submit"> Booking
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="p-3 py-5">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="{{url_for('static', filename= 'image/2.jpg')}}"
+                         alt="Card image">
+                    <div class="card-body">
+                        <h4 class="card-title">{{flight.startAirport.airportName}} <i class='bx bx-chevrons-right'
+                                                                                      style='color:#1b223c'></i>
+                            {{flight.destinationAirport.airportName}}</h4>
+                        <p class="card-text">Price of Business Class: {{flight.priceBusinessClass}} VND</p>
+                        <p class="card-text">Price of Economy Class: {{flight.priceEconomyClass}} VND</p>
+                        <p class="card-text">Business Class: {{flight.noBusinessClass -
+                            slot['business']}}/{{flight.noBusinessClass}} </p>
+                        <p class="card-text">Economy Class: {{flight.noEconomyClass -
+                            slot['economy']}}/{{flight.noEconomyClass}} </p>
+                        <p class="card-text">Take off time: {{flight.takeOffTime}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+

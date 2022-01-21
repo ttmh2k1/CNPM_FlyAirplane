@@ -1,0 +1,35 @@
+{% if isEmp %}
+{% extends 'layouts/baseEmp.html' %}
+{% else %}
+{% extends 'layouts/baseCus.html' %}
+{% endif %}
+
+{% block content %}
+<link href="../static/css/ChangePw.css" rel="stylesheet"/>
+<div class="form">
+    <h3>Change password</h3>
+    <div class="form-group">
+        {% if err %}
+        <div class="alert alert-danger text-center"> {{err}}</div>
+        {% endif %}
+        {% if msg %}
+        <div class="alert alert-success text-center"> {{msg}}</div>
+        {% endif %}
+        <form action="" method="post"
+              oninput='conPassword.setCustomValidity(conPassword.value != newPassword.value ? "Passwords do not match." : "")'>
+            <label>Old password</label>
+            <input type="password" class="form-control" name="oldPassword" placeholder="Enter old password" required>
+
+            <label>New password</label>
+            <input type="password" class="form-control" name="newPassword" placeholder="Enter new password" required>
+
+            <label>Confirm password</label>
+            <input type="password" class="form-control" name="conPassword" placeholder="Confirm password" required>
+            <div class="mt-5 text-center">
+                <button type="submit" class="btn btn-primary save-button">Save change</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

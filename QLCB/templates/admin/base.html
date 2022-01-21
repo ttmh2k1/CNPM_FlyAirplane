@@ -1,0 +1,194 @@
+{% import 'admin/layout.html' as layout with context -%}
+{% import 'admin/static.html' as admin_static with context %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% if admin_view.category %}{{ admin_view.category }} - {% endif %}{{ admin_view.name }} -
+        {{ admin_view.admin.name }}{% endblock %}</title>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    {% block head_meta %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {% endblock %}
+    {% block head_css %}
+    <link href="{{ admin_static.url(filename='bootstrap/bootstrap4/swatch/{swatch}/bootstrap.min.css'.format(swatch=config.get('FLASK_ADMIN_SWATCH', 'default')), v='4.2.1') }}"
+          rel="stylesheet">
+    {% if config.get('FLASK_ADMIN_SWATCH', 'default') == 'default' %}
+    <link href="{{ admin_static.url(filename='bootstrap/bootstrap4/css/bootstrap.min.css', v='4.2.1') }}"
+          rel="stylesheet">
+    {% endif %}
+    <link href="{{ admin_static.url(filename='admin/css/bootstrap4/admin.css', v='1.1.1') }}" rel="stylesheet">
+    <link href="{{ admin_static.url(filename='bootstrap/bootstrap4/css/font-awesome.min.css', v='4.7.0') }}"
+          rel="stylesheet">
+    {% if admin_view.extra_css %}
+    {% for css_url in admin_view.extra_css %}
+    <link href="..static/css/style.css" rel="stylesheet">
+    {% endfor %}
+    {% endif %}
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+    <style>
+        body {
+            padding-left: 30px;
+            padding-right: 30px;
+            background: linear-gradient(white, silver);
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+    </style>
+    <style>
+        nav {
+            background-color: darkGrey;
+        }
+        nav a {
+            display: inline-block;
+            padding: 30px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold
+            color: white;
+        }
+        nav a:hover {
+            background-color: dimGray;
+        }
+    </style>
+    {% endblock %}
+    {% block head %}
+    {% endblock %}
+    {% block head_tail %}
+    {% endblock %}
+</head>
+<body>
+{% block page_body %}
+<div class="container-fluid">
+    <img src="{{ url_for('static', filename='image/header.png') }}" width="100%">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3" style="background-color: darkGrey" role="navigation">
+        <i class='bx bxs-plane-alt' style="font-size: 30px; color: #fff; text-align: center"></i>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#admin-navbar-collapse"
+                aria-controls="admin-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- navbar content -->
+        <div class="collapse navbar-collapse" id="admin-navbar-collapse">
+            {% block brand %}
+            <a class="navbar-brand" href="{{ admin_view.admin.url }}">{{ admin_view.admin.name }}</a>
+            {% endblock %}
+            {% block main_menu %}
+            <ul class="navbar-nav mx-auto">
+                {{ layout.menu() }}
+            </ul>
+            {% endblock %}
+
+            {% block menu_links %}
+            <ul class="nav navbar-nav navbar-right">
+                {{ layout.menu_links() }}
+            </ul>
+            {% endblock %}
+            {% block access_control %}
+            {% endblock %}
+        </div>
+    </nav>
+    {% block messages %}
+    {{ layout.messages() }}
+    {% endblock %}
+
+    {# store the jinja2 context for form_rules rendering logic #}
+    {% set render_ctx = h.resolve_ctx() %}
+
+    {% block body %}
+    {% endblock %}
+</div>
+{% endblock %}
+
+<!-- Footer -->
+<footer class="text-center text-lg-start text-white" style="background: #696969">
+  <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-2 border-bottom">
+    <!-- Left -->
+    <div class="me-1 d-none d-lg-block ">
+      <span class="d-flex justify-content-center justify-content-lg-between p-2">Get connected with us on social networks:</span>
+    </div>
+    <!-- Left -->
+
+    <!-- Right -->
+    <div>
+      <a href="" class="me-4 text-reset"><i class='bx bxl-facebook-circle bx-md' style='color:#E8E8E8' ></i></a>
+      <a href="" class="me-4 text-reset"><i class='bx bxl-google-plus-circle bx-md' style='color:#E8E8E8' ></i></a>
+      <a href="" class="me-4 text-reset"><i class='bx bxl-instagram-alt bx-md' style='color:#E8E8E8' ></i></a>
+      <a href="" class="me-4 text-reset"><i class='bx bxl-github bx-md' style='color:#E8E8E8' ></i></a>
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+  <!-- Section: Links  -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i>FLY AIRLINE
+          </h6>
+          <p>
+              FLY is the website of the airline FLY
+              <br>
+              <br>
+              We khow why you fly. We are FLY.
+          </p>
+        </div>
+
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class='bx bxs-home bx-sm' style='color:#E8E8E8'></i> 1 Vo Van Ngan St, Linh Chieu, Thu Duc City, HCM City</p>
+          <p><i class='bx bx-mail-send bx-sm' style='color:#E8E8E8'></i> FlyPlane.com</p>
+          <p><i class='bx bxs-phone bx-sm' style='color:#E8E8E8'></i> 0123 456 789</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+</footer>
+<!-- Footer -->
+
+{% block tail_js %}
+<script src="{{ admin_static.url(filename='vendor/jquery.min.js', v='2.1.4') }}" type="text/javascript"></script>
+<script src="{{ admin_static.url(filename='bootstrap/bootstrap4/js/popper.min.js') }}" type="text/javascript"></script>
+<script src="{{ admin_static.url(filename='bootstrap/bootstrap4/js/bootstrap.min.js', v='4.2.1') }}"
+        type="text/javascript"></script>
+<script src="{{ admin_static.url(filename='vendor/moment.min.js', v='2.9.0') }}" type="text/javascript"></script>
+<script src="{{ admin_static.url(filename='vendor/bootstrap4/util.js', v='4.3.1') }}" type="text/javascript"></script>
+<script src="{{ admin_static.url(filename='vendor/bootstrap4/dropdown.js', v='4.3.1') }}"
+        type="text/javascript"></script>
+<script src="{{ admin_static.url(filename='vendor/select2/select2.min.js', v='4.2.1') }}"
+        type="text/javascript"></script>
+<script src="{{ admin_static.url(filename='vendor/multi-level-dropdowns-bootstrap/bootstrap4-dropdown-ml-hack.js') }}"
+        type="text/javascript"></script>
+<script src="{{ admin_static.url(filename='admin/js/helpers.js', v='1.0.0') }}" type="text/javascript"></script>
+{% if admin_view.extra_js %}
+{% for js_url in admin_view.extra_js %}
+<script src="{{ js_url }}" type="text/javascript"></script>
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+{% block tail %}
+{% endblock %}
+</body>
+
+</html>
